@@ -9,15 +9,21 @@
  * Online (Heroku) URL: _______________________________________________________
  *
  ********************************************************************************/
+var express = require("express")
+var app = express()
 
-const express = require("express")
-const app = express()
-const port = 8080
+var HTTP_PORT = process.env.PORT || 8080
 
-app.get("/", (req, res) => {
+function onHttpStart() {
+  console.log("Express http server listening on: " + HTTP_PORT)
+}
+
+app.get("/", function (req, res) {
   res.send("Tymur Levtsun - 109570200")
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.get("/about", function (req, res) {
+  res.send("<h3>About</h3>")
 })
+
+app.listen(HTTP_PORT, onHttpStart)
